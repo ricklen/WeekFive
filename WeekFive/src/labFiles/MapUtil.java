@@ -1,5 +1,6 @@
 package labFiles;
 
+import java.io.ObjectOutputStream.PutField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,33 +33,73 @@ public class MapUtil {
         return true;
     }
         
+    
+    //@ ensures (\forall k; inverse(inverse) = k)
     public static <K, V> Map<V, Set<K>> inverse(Map<K, V> map) {
-    	Map<V, Set<K>> inverse = new HashMap<V, Set<K>>();
-    	
-    	ArrayList<V> list = new ArrayList<V>(map.values());
-    	Set<K> set = new HashSet<K>(map.keySet());
-    	
-    	for (V v : list) {
-    		inverse.put(v, set.
+    	Map<V, Set<K>> newMap = new HashMap<V, Set<K>>();
+    	for (Map.Entry<K, V> entry : map.entrySet()	) {
+    		HashSet<K> set = new HashSet<K>();
     		
-    		
+    		if (!newMap.containsKey(entry.getValue())) {
+    			set.add(entry.getKey());
+    			newMap.put(entry.getValue(), set);
+    		} else {
+    			newMap.get(entry.getValue()).add(entry.getKey());
+    		}
     	}
-    	
-    	
-    	
-        // TODO: implement, see exercise P-5.3
-        return null;
-	}
+    	return newMap;
+    }
+    		
+
+
 	public static <K, V> Map<V, K> inverseBijection(Map<K, V> map) {
-        // TODO: implement, see exercise P-5.3
-        return null;
+        if (isOneOnOne(map)) {
+        	Map<V, K> newMap = new HashMap<V, K>();
+        	for (Map.Entry<K, V> entry : map.entrySet()) {
+        		newMap.put(entry.getValue(), entry.getKey());
+        	}
+        	return newMap;
+        } else {
+        	return null;
+        }
 	}
+
+        
 	public static <K, V, W> boolean compatible(Map<K, V> f, Map<V, W> g) {
-        // TODO: implement, see exercise P-5.4
-        return false;
+		for (Map.Entry<K, V> entry : f.entrySet()) {
+			if (!g.containsKey(entry.getValue())) {
+				return false;
+			}
+		}
+        return true;
 	}
+	
+	//@ ensures (!compatible(f,g) ==> \result == null);
+	//@ ensures (compatible(f,g)  ==> (\forall k; compose(k.getValue ???
+	// TODO: WTF?
 	public static <K, V, W> Map<K, W> compose(Map<K, V> f, Map<V, W> g) {
-        // TODO: implement, see exercise P-5.5
+		if (compatible(f, g)) {
+			Map<K, W> newMap = new HashMap<K, W>();
+			for (Map.Entry<K, V> entry : f.entrySet()) {
+				newMap.put(entry.getKey(), g.get(entry.getValue()));
+			}
+		return newMap;
+		}
         return null;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

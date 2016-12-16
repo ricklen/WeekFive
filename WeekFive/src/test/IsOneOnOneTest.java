@@ -25,6 +25,12 @@ public class IsOneOnOneTest {
         f2.put(2, 'b');
 
         assertTrue(MapUtil.isOneOnOne(f2));
+        
+        // Kijken of we dit kunnen overwriten (kort: ja)
+        f2.put(1, 'c');
+        System.out.println(f2.toString());
+        assertTrue(MapUtil.isOneOnOne(f2));
+
     }
 
     @Test
