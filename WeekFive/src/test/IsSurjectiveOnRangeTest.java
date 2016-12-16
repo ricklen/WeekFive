@@ -1,7 +1,7 @@
-package ss.week5.test;
+package test;
 
 import org.junit.Test;
-import ss.week5.MapUtil;
+import labFiles.MapUtil;
 
 import java.util.*;
 

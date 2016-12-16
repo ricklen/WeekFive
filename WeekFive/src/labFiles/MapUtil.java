@@ -1,4 +1,4 @@
-package ss.week5;
+package labFiles;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -6,13 +6,51 @@ import java.util.Map;
 import java.util.Set;
 
 public class MapUtil {
+	// TODO: ask these questions
+	//@ requires dat er een goede map in gaat?
+	//@ ensures \result == true || \result == false;
+	//@ ensures duplicate value ==> false; 			???
+	//*@pure*/
+	// This method puts all values into a set to check for duplicates
     public static <K, V> boolean isOneOnOne(Map<K, V> map) {
-        // TODO: implement, see exercise P-5.1
-        return false;
+        // Waarom moet deze static? ???
+    	int length = map.size();
+    	Set<V> set = new HashSet<V>(map.values());
+    	if (set.size() < length) {
+    		return false;
+    	} else {
+    		return true;
+    	}
+
     }
+
     public static <K, V> 
            boolean isSurjectiveOnRange(Map<K, V> map, Set<V> range) {
-        // TODO: implement, see exercise P-5.2
+        int counter = 0;
+        
+//        for (int i = 0; i < range.size(); i++) {
+//        	if (!map.containsKey(range[i])) {
+//        		
+//        	}
+//        }
+        
+        
+        
+    	for (int i = 0; i < map.size(); i++) {
+    		Object x = map.get(i);
+    		for(Object c : range){
+    			if (x.equals(c)){
+    				counter++;
+    			}
+    			
+    		}
+    	}
+    	if (counter == range.size()){
+    		return true;
+    	}
+    	
+    	// kijk naar alle values in de range of er een key bij hoort waarvoor geldt k.get = v
+    	
         return false;
     }
     public static <K, V> Map<V, Set<K>> inverse(Map<K, V> map) {
