@@ -34,18 +34,25 @@ public class EncodingTest {
 	   byte[] bytes3 = Base64.decodeBase64(hexString2.getBytes());
 	   String stringetje = new String(bytes3);
 	   System.out.println("\nLength of original 0102030405060: " + hexString2.length() + "\n" + stringetje + " Length of string: " + stringetje.length());
-	   
-	   
-	   
+	  
 	   String string64 = "U29mdHdhcmUgU3lzdGVtcw==";
 	   byte[] bytes64 = string64.getBytes();
-	   String string642 = new String(bytes64);
-	   char[] chars64 = string642.toCharArray();
 	   byte[] decoded64 = Base64.decodeBase64(bytes64);
 	   String decodedstring64 = new String(decoded64);
 	   System.out.println("\nEncoded: " + string64 + "\nDecoded: " + decodedstring64 + "\n");
-			   
+		
+	   for (int i = 0; i <= 10; i++) {
+		   System.out.println("String: " + stringa(i) + " becomes: " + Base64.encodeBase64String(stringa(i).getBytes()));
+	   }
 	   
 	           
+    }
+    
+    public static String stringa(int a) {
+    	StringBuilder result = new StringBuilder();
+    	for (int i = 0; i <= a; i++) {
+    		result.append("a");
+    	}
+    	return result.toString();
     }
 }
