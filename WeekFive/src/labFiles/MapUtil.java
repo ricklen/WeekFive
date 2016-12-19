@@ -9,7 +9,8 @@ import java.util.Set;
 
 public class MapUtil {
 	
-	//@ ensures (\forall k1,k2; k1 != k2; get(k1) != get(k2));
+	//@ ensures ()
+	//@ ensures (\forall K k1,k2; k1 != k2 && map.containskey(k1) && map.containskey(k2); map.get(k1) != map.get(k2));
 	//@pure
 	// This method puts all values into a set to check for duplicates
     public static <K, V> boolean isOneOnOne(Map<K, V> map) {
@@ -23,7 +24,7 @@ public class MapUtil {
 
     } 
 
-    //@ ensures (\forall v; range.contains(v); map.containsValue(v)); 
+    //@ ensures (\forall V v; range.contains(v); map.containsValue(v)); 
     public static <K, V> boolean isSurjectiveOnRange(Map<K, V> map, Set<V> range) {
         for (V i : range) {
         	if (!map.containsValue(i)) {
@@ -34,7 +35,7 @@ public class MapUtil {
     }
         
     
-    //@ ensures (\forall k; inverse(inverse) = k)
+    //@ ensures (\forall K k; inverse(map(k)) = k)
     public static <K, V> Map<V, Set<K>> inverse(Map<K, V> map) {
     	Map<V, Set<K>> newMap = new HashMap<V, Set<K>>();
     	for (Map.Entry<K, V> entry : map.entrySet()	) {
